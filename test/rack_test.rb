@@ -24,6 +24,8 @@ class RackTest < Minitest::Test
   end
 
   it 'works as middleware in front of Rack::Lock, with lock enabled' do
+    pid = Process.pid
+    Process.kill("SEGV", pid)
     @foo.enable :lock
     check(@foo, Rack::Lock, @bar)
   end
