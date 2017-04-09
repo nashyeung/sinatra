@@ -4,10 +4,10 @@
 def projectName = env.JOB_NAME.split('/')[0]
 def buildStatus = 'SUCCESS'
 
-lock("lock_${projectName}_${env.BRANCH_NAME}") {
-  stage('checkout') {
-    checkout scm
+node {
+  checkout scm
 
+  stage('checkout') {
     stash name: 'Gemfile', includes: 'Gemfile,Gemfile.lock'
   }
 
